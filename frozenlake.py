@@ -1,9 +1,16 @@
 import gym 
 from gym.envs.registration import register
-import msvcrt
+import platform
 
 def get_key_in_str():
-    return msvcrt.getch().decode()
+    OS = platform.system()
+    if OS == "Linux":
+        from getch import getch     # Ubuntu
+        return getch()
+        
+    elif OS == "Windows":
+        from msvcrt import getch    # Windows
+        return getch().decode()
 
 # key mapping
 LEFT = 0
